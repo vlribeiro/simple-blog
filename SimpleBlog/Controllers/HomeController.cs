@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SimpleBlog.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,23 +9,20 @@ namespace SimpleBlog.Controllers
 {
     public class HomeController : Controller
     {
+        private BlogDBContext db = new BlogDBContext();
+
         public ActionResult Index()
         {
-            return View();
+            var posts = db.Posts.ToList();
+
+            return View(posts);
         }
 
-        public ActionResult About()
+        public ActionResult Authors()
         {
-            ViewBag.Message = "Your application description page.";
+            var authors = db.Users.ToList();
 
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            return View(authors);
         }
     }
 }
